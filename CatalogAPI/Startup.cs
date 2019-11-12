@@ -20,12 +20,13 @@ namespace CatalogAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<CatalogContext>();
-            services.AddCors(c =>
-            {
-                c.AddDefaultPolicy(x =>
-                {
-                    x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-                });
+            services.AddCors();
+            // c =>
+            // {
+            //     c.AddDefaultPolicy(x =>
+            //     {
+            //         x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            //     });
                 // //Named Policy
                 // c.AddPolicy("AllowPartners", x => {
                 //     x.WithOrigins("http://microsoft.com", "http://synergetics.com")
@@ -35,7 +36,6 @@ namespace CatalogAPI
                 //{
                 //    x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
                 //});
-            });
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info
@@ -61,7 +61,9 @@ namespace CatalogAPI
                 app.UseDeveloperExceptionPage();
                
             }
-            app.UseCors();
+            app.UseCors(c=>{
+                c.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                });
             app.UseSwagger();
             app.UseSwaggerUI(config =>
             {
