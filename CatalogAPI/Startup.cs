@@ -22,19 +22,19 @@ namespace CatalogAPI
             services.AddScoped<CatalogContext>();
             services.AddCors(c =>
             {
-                // c.AddDefaultPolicy(x =>
-                // {
-                //     x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-                // });
+                c.AddDefaultPolicy(x =>
+                {
+                    x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                });
                 // //Named Policy
                 // c.AddPolicy("AllowPartners", x => {
                 //     x.WithOrigins("http://microsoft.com", "http://synergetics.com")
                 //     .WithMethods("GET", "POST").AllowAnyHeader();
                 // });
-                c.AddPolicy("AllowAll", x =>
-                {
-                    x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-                });
+                //c.AddPolicy("AllowAll", x =>
+                //{
+                //    x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                //});
             });
             services.AddSwaggerGen(options =>
             {
@@ -62,7 +62,7 @@ namespace CatalogAPI
                 app.UseDeveloperExceptionPage();
                
             }
-            app.UseCors("AllowAll");
+            app.UseCors();
             app.UseSwagger();
             app.UseSwaggerUI(config =>
             {
